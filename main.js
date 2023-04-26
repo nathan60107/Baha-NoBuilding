@@ -286,7 +286,11 @@ function processHtml(html, mode) {
     removeCount++
     // Should be kept
   } else {
-    if (mode === 'append') $('.b-list > tbody').append(html)
+    if (mode === 'append') {
+      html.querySelector('.b-list__main__title').href =
+        html.querySelector('.b-list__main__title').href.replace(/&tnum=\d+&bPage=\d+/, '')
+      $('.b-list > tbody').append(html)
+    }
   }
   postSet.add(snA)
 }

@@ -3,7 +3,7 @@
 // @description  已經厭倦看到一堆不感興趣的大樓? 這就是你需要的
 // @namespace    nathan60107
 // @author       nathan60107(貝果)
-// @version      1.1.2
+// @version      1.1.3
 // @homepage     https://home.gamer.com.tw/creationCategory.php?owner=nathan60107&c=425332
 // @match        https://forum.gamer.com.tw/B.php?*bsn=60076*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=gamer.com.tw
@@ -289,7 +289,7 @@ function processHtml(html, mode) {
     if (mode === 'append') {
       aTag = html.querySelector('.b-list__main a')
       aTag.href = aTag.href.replace(/&tnum=\d+&bPage=\d+/, '')
-      $('.b-list > tbody').append(html)
+      $('form[method="post"] > .b-list-wrap > .b-list > tbody').append(html)
     }
   }
   postSet.add(snA)

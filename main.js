@@ -3,7 +3,7 @@
 // @description  已經厭倦看到一堆不感興趣的大樓? 這就是你需要的
 // @namespace    nathan60107
 // @author       nathan60107(貝果)
-// @version      1.1.3
+// @version      1.1.4
 // @homepage     https://home.gamer.com.tw/creationCategory.php?owner=nathan60107&c=425332
 // @match        https://forum.gamer.com.tw/B.php?*bsn=60076*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=gamer.com.tw
@@ -302,6 +302,27 @@ function htmlToPost() {
   updateSettingPanel()
 }
 
+function clearLink() { // Clear the link of b-list__main__title, keep bsn and snA
+  document.querySelectorAll('a.b-list__main__title').forEach(aTag => {
+    const url = new URL(aTag.href)
+
+    const bsn = url.searchParams.get('bsn')
+    const snA = url.searchParams.get('snA')
+
+    url.search = ''
+
+    if (bsn !== null) {
+      url.searchParams.set('bsn', bsn)
+    }
+
+    if (snA !== null) {
+      url.searchParams.set('snA', snA)
+    }
+
+    aTag.href = url.toString()
+  })
+}
+
 /**
  * @type {IntersectionObserverCallback}
  */
@@ -316,6 +337,7 @@ function loadMore(entries) {
     $(resHTML).find('.b-list__row:not(:has(.b-list_ad))').map(
       function f() { processHtml(this, 'append') }
     )
+    clearLink()
     updateSettingPanel()
     // Register lazyload img and draw non-image thumbnail
     Forum.B.lazyThumbnail()
